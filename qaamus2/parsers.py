@@ -90,13 +90,15 @@ class Parser(object):
     @property
     def pages(self):
         """return list of pages yang ada di pagination,
-        list, urut dari yang terkecil sampai yang terbesar"""
-        pattern = re.compile(r"""<li> ?<a href='(http://qaamus\.com/indonesia-arab[\w\/]+?) '>(?!Next)""")
+        list, urut dari yang terkecil sampai yang terbesar (berdasarkan page)"""
+        pattern = re.compile(r"""<li> ?<a href='(http://qaamus\.com/indonesia-arab[\w+\/]+?) '>(?!Next)""")
         pages = [x.group(1) for x in pattern.finditer(self.html_source)]
+       
         if len(pages) == 0:
             return None
         pages.append(re.sub(r'\d+', str(self.current_page), pages[0]))
-        return sorted(pages)
+
+        return sorted(pages, key=lambda page: int(re.search(r'\d+', page).group()))
 
     @property
     def current_page(self):
