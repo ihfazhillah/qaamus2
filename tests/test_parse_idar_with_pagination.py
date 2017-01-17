@@ -67,10 +67,21 @@ def test_has_pagination_false():
 
 def test_pages():
     parser = parsers.Parser(HTML_FIXTURE)
-    pagination1 = 'http://qaamus.com/indonesia-arab/lari/4'
-    tools.eq_(pagination1, parser.pages[-1])
+    page_url = 'http://qaamus.com/indonesia-arab/lari/4'
+    tools.eq_(page_url, parser.pages[-1])
     tools.eq_(4, len(parser.pages))
 
 def test_current_page():
     parser = parsers.Parser(HTML_FIXTURE)
     tools.eq_(1, parser.current_page)
+
+# found bug
+def test_pages_with_plus_sign_in_the_url():
+    with open(path.join(THE_DIR, 'source/rumah+sakit.html'), 'r') as f:
+        html = f.read()
+
+    parser = parsers.Parser(html)
+    tools.eq_(len(parser.pages), 5)
+    print(max(parser.pages))
+    page_url = 'http://qaamus.com/indonesia-arab/rumah+sakit/4'
+    tools.eq_(page_url, parser.pages[3])
