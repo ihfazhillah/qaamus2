@@ -13,3 +13,9 @@ def test_representation():
     munawwir = MunawwirModel(**DATA)
     expected = "<MunawwirModel -makan->"
     tools.eq_(expected, munawwir.__repr__())
+
+@tools.raises(ValueError)
+def test_berhubungan_harus_instance_dari_munawwirberhubmodelcollections():
+    data = DATA.copy()
+    data['berhubungan'] = 'apasaja'
+    MunawwirModel(**data)
