@@ -1,5 +1,5 @@
 """Module parser"""
-import re
+from qaamus2 import patterns
 
 
 class Parser(object):
@@ -26,8 +26,7 @@ class Parser(object):
             BILA HANYA SATU
                 string
         """
-        pattern = re.compile("""<div class=lateef2>(.+?)</div>.+<em.+?>(.+?)</em>.+?<div class="panel-footer">(.+?)</div>""")
-        hasil = pattern.search(self.html_source)
+        hasil = patterns.IDAR.search(self.html_source)
 
         if hasil:
             hasil = hasil.groups()
@@ -37,8 +36,7 @@ class Parser(object):
 
             return hasil
 
-        pattern = re.compile("""<div class=lateef2>(.+?)</div>""")
-        return pattern.search(self.html_source).group(1).strip()
+        return patterns.ANGKA_PEGON.search(self.html_source).group(1).strip()
 
     def berhubungan(self, strip_tags=True):
         """Proses arti berhubungan
@@ -53,8 +51,7 @@ class Parser(object):
                     3. arab
                 dan bila tidak ditemukan akan raise StopIteration
         """
-        pattern = re.compile("""<td.+?><a href="(.+?)">(.+?)</a></td><td class="lateef".+?>(.+?</div>)</td>""")
-        hasil = pattern.finditer(self.html_source)
+        hasil = patterns.BERHUBUNGAN.finditer(self.html_source)
 
         hasil_gen = (x.groups() for x in hasil)
 
@@ -75,15 +72,13 @@ class Parser(object):
 
         return str
         """
-        tags = re.compile(r"<.+?>")
-        return tags.sub('', to_strip).strip()
+        return patterns.TAGS.sub('', to_strip).strip()
 
     @property
     def has_pagination(self):
         """Return true if page has pagination,
         else, return False"""
-        pattern = re.compile(r"""http://qaamus\.com/indonesia-arab[\w\/]+?""")
-        if pattern.search(self.html_source):
+        if patterns.PAGINATION.search(self.html_source):
             return True
         return False
 
@@ -91,21 +86,19 @@ class Parser(object):
     def pages(self):
         """return list of pages yang ada di pagination,
         list, urut dari yang terkecil sampai yang terbesar (berdasarkan page)"""
-        pattern = re.compile(r"""<li> ?<a href='(http://qaamus\.com/indonesia-arab[\w+\/]+?) '>(?!Next)""")
-        pages = [x.group(1) for x in pattern.finditer(self.html_source)]
+        pages = [x.group(1) for x in patterns.PAGINATION_URL.finditer(self.html_source)]
        
         if len(pages) == 0:
             return None
-        pages.append(re.sub(r'\d+', str(self.current_page), pages[0]))
+        pages.append(patterns.PAGE_IN_URL.sub(str(self.current_page), pages[0]))
 
-        return sorted(pages, key=lambda page: int(re.search(r'\d+', page).group()))
+        return sorted(pages,
+                      key=lambda page: int(patterns.PAGE_IN_URL.search(page).group()))
 
     @property
     def current_page(self):
         """Return int page sekarang"""
-        pattern = re.compile(r'<a href=#>(\d+)</a>')
-
-        cur_page = pattern.search(self.html_source)
+        cur_page = patterns.CURRENT_PAGE.search(self.html_source)
 
         if cur_page:
             return int(cur_page.group(1))
