@@ -1,4 +1,4 @@
-from qaamus2.models import MunawwirBerhubModel
+from qaamus2.models.munawwir_berhub import MunawwirBerhubModel
 from nose import tools
 
 DATA = {'indo': 'mengambil tongkat',
