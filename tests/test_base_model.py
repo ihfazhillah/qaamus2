@@ -1,4 +1,4 @@
-from qaamus2.models import QaamusBaseModel
+from qaamus2.models.basemodel import QaamusBaseModel
 from nose import tools
 
 def test_base_model_repr():
