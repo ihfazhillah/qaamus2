@@ -14,3 +14,7 @@ def test_representation():
 @tools.raises(ValueError)
 def test_indo_tidak_boleh_integer():
     MunawwirBerhubModel(indo=123, arab='عربي', url='http://qaamus.com')
+
+@tools.raises(ValueError)
+def test_indo_tidak_boleh_string_digit():
+    MunawwirBerhubModel(indo='123', arab='عربي', url='http://qaamus.com')

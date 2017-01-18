@@ -12,7 +12,7 @@ class MunawwirBerhubModel(QaamusBaseModel):
 
     @classmethod
     def _validate_indo(cls, indo):
-        if isinstance(indo, int):
+        if isinstance(indo, int) or indo.isdigit():
             raise ValueError("indo tidak boleh integer")
 
         return indo
