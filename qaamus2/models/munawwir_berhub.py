@@ -1,7 +1,9 @@
+"""Munawwir berhubungan model"""
 from qaamus2.models.basemodel import QaamusBaseModel
 
 
 class MunawwirBerhubModel(QaamusBaseModel):
+    """Class MunawwirBerhubModel"""
 
     def __init__(self, indo, arab, url):
         super(MunawwirBerhubModel, self).__init__(indo)
