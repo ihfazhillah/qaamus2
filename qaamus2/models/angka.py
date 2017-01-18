@@ -20,7 +20,7 @@ class AngkaModel(QaamusBaseModel):
     @classmethod
     def _check_angka(cls, indo):
         """Angka harus berupa int, atau string angka"""
-        if not isinstance(indo, int):
+        if not (isinstance(indo, int) or indo.isdigit()):
             raise ValueError(("Angka harus berupa int, "
                               "atau string berisi digit"))
         return indo

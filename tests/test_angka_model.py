@@ -20,4 +20,6 @@ def test_data_harus_betul():
 def test_raise_value_error_kalau_angka_bukan_digit_atau_string_angka():
     angka = AngkaModel(indo='inistring', arab='ini string',
                        url='ini url')
-    
+
+def test_indo_string_berisi_digit_tidak_raise_valueerror():
+    angka = AngkaModel('12', 'عربي', 'url')
