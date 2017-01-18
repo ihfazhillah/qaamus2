@@ -9,3 +9,9 @@ def test_angka_model_representation():
     angka = AngkaModel(**DATA)
     expected = '<AngkaModel -12->'
     tools.eq_(expected, angka.__repr__())
+
+def test_data_harus_betul():
+    angka = AngkaModel(**DATA)
+    tools.eq_(12, angka.indo)
+    tools.eq_("اثنا عشر", angka.arab)
+    tools.eq_("http://coba.saja/angka/12", angka.url)
