@@ -9,3 +9,8 @@ def test_representation():
     munawwir_berhub = MunawwirBerhubModel(**DATA)
     expected = '<MunawwirBerhubModel -mengambil tongkat->'
     tools.eq_(expected, munawwir_berhub.__repr__())
+
+
+@tools.raises(ValueError)
+def test_indo_tidak_boleh_integer():
+    MunawwirBerhubModel(indo=123, arab='عربي', url='http://qaamus.com')
