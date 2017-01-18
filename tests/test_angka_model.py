@@ -15,3 +15,9 @@ def test_data_harus_betul():
     tools.eq_(12, angka.indo)
     tools.eq_("اثنا عشر", angka.arab)
     tools.eq_("http://coba.saja/angka/12", angka.url)
+
+@tools.raises(ValueError)
+def test_raise_value_error_kalau_angka_bukan_digit_atau_string_angka():
+    angka = AngkaModel(indo='inistring', arab='ini string',
+                       url='ini url')
+    
