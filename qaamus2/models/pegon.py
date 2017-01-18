@@ -16,7 +16,7 @@ class PegonModel(QaamusBaseModel):
         """Validasi indo, tidak bole berupa int atau
         string berisi digit"""
 
-        if isinstance(indo, int):
+        if isinstance(indo, int) or indo.isdigit():
             raise ValueError("""Value param indo tidak bole berisi int,
                                 atau string berisi digit""")
         return indo

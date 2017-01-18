@@ -14,3 +14,7 @@ def test_representation():
 @tools.raises(ValueError)
 def test_raise_value_error_ketika_dimasukkan_integer():
     pegon = PegonModel(indo=12, arab='عربي', url='http://qaamus.com')
+
+@tools.raises(ValueError)
+def test_raise_value_error_ketika_yang_dimasukkan_string_berisi_digit():
+    pegon = PegonModel(indo='12', arab='عربي', url='http://qaamus.com')
