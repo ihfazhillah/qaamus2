@@ -2,7 +2,8 @@ import requests
 from qaamus2.models.angka import AngkaModel
 from qaamus2.models.pegon import PegonModel
 from qaamus2.parsers import Parser
-
+from qaamus2.models.munawwir_berhub_collections import MunawwirBerhubModelCollections
+from qaamus2.models.munawwir_berhub import MunawwirBerhubModel
 
 class AngkaScraper(object):
     
@@ -62,3 +63,11 @@ class MunawwirScraper(object):
     @classmethod
     def check_pilihan(cls, pilihan):
         return pilihan == 'munawwir'
+
+    @property
+    def berhubungan(self):
+        parser = Parser(self.response)
+        berhubungan = parser.berhubungan()
+        berhubungan_iter = (MunawwirBerhubModel(x[1], x[2], x[0]) for x in berhubungan)
+
+        return MunawwirBerhubModelCollections(berhubungan_iter)
