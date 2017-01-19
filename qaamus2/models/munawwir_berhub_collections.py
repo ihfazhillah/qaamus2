@@ -3,7 +3,7 @@ from itertools import tee
 class MunawwirBerhubModelCollections(object):
     
     def __init__(self, iterator):
-        iterator = iter(iterator)
+        # iterator = iter(iterator)
         self.new, self.bak = tee(iterator)
         self.length = len(list(self.bak))
 
@@ -12,4 +12,7 @@ class MunawwirBerhubModelCollections(object):
 
     def __iter__(self):
         return self.new
+
+    def __next__(self):
+        return next(self.new)
 
