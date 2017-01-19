@@ -12,6 +12,7 @@ class AngkaScraper(object):
 
     def get_response(self, indo):
         resp = requests.get(self.url)
+        resp.encoding = 'cp1256'
         return resp.text
 
     def hasil(self):
@@ -19,6 +20,7 @@ class AngkaScraper(object):
         utama = parser.utama()
         return AngkaModel(self.indo, utama, self.url)
 
+    @classmethod
     def check_pilihan(self, pilihan):
         return pilihan == 'angka'
 

@@ -14,8 +14,7 @@ def test_scrape_angka_response(mock_obj):
 
     angka = AngkaScraper(2017)
 
-    tools.eq_(angka.response, RESPONSE_TEXT, 
-              "current response is: %s" % angka.response)
+    tools.eq_(angka.response, RESPONSE_TEXT)
 
 
 @patch('qaamus2.scraper.requests.get')
@@ -32,5 +31,4 @@ def test_scrape_angka_hasil(mock_obj):
 
 @patch('qaamus2.scraper.requests.get')
 def test_scrape_angka_check_pilihan(mock_obj):
-    angka = AngkaScraper(2017)
-    tools.eq_(angka.check_pilihan('angka'), True)
+    tools.eq_(AngkaScraper.check_pilihan('angka'), True)
