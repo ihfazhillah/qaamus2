@@ -4,12 +4,13 @@ from qaamus2.models import munawwir_berhub_collections as mbc
 
 class MunawwirModel(QaamusBaseModel):
     """Model Munawwir"""
-    def __init__(self, indo, arab, baca, url, berhubungan):
+    def __init__(self, indo, arab, baca, url, berhubungan, sumber):
         super(MunawwirModel, self).__init__(indo)
         self.indo = indo
         self.arab = arab
         self.baca = baca
         self.url = url
+        self.sumber = sumber
         self.berhubungan = self._validate_berhubungan(berhubungan)
 
     @classmethod

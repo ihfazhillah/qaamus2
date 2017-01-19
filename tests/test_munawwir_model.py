@@ -7,6 +7,7 @@ DATA = {'indo': 'makan',
         'arab': 'أكل',
         'baca': 'akala',
         'url': 'http://fakeurl.url',
+        'sumber': 'sumber',
         'berhubungan': BERHUBUNGAN}
 
 def test_representation():
