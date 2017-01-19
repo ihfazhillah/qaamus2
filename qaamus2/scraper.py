@@ -1,5 +1,6 @@
 import requests
 from qaamus2.models.angka import AngkaModel
+from qaamus2.models.pegon import PegonModel
 from qaamus2.parsers import Parser
 
 
@@ -25,4 +26,24 @@ class AngkaScraper(object):
         return pilihan == 'angka'
 
 
+class PegonScraper(object):
 
+    def __init__(self, indo):
+        self.indo = indo
+        self.url = "http://qaamus.com/terjemah-nama/{}".format(indo)
+        self.get_response()
+        # self.response = None
+
+    def get_response(self):
+        resp = requests.get(self.url)
+        resp.encoding = 'cp1256'
+        self.response = resp.text
+
+    def hasil(self):
+        parser = Parser(self.response)
+        utama = parser.utama()
+        return PegonModel(self.indo, utama, self.url)
+
+    @classmethod
+    def check_pilihan(cls, pilihan):
+        return pilihan == 'pegon'
