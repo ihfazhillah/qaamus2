@@ -1,12 +1,10 @@
-from unittest.mock import Mock, patch
-import os
+from unittest.mock import patch
 from qaamus2.scraper import AngkaScraper
 from qaamus2.models.angka import AngkaModel
 from nose import tools
+from tests.config import html_markup
 
-THIS_PATH = os.path.dirname(__file__)
-with open(os.path.join(THIS_PATH, 'source/2017.html'), 'r') as f:
-    RESPONSE_TEXT = f.read() 
+RESPONSE_TEXT = html_markup('source/2017.html') 
 
 @patch('qaamus2.scraper.requests.get')
 def test_scrape_angka_response(mock_obj):
