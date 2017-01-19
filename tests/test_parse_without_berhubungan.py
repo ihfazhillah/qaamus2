@@ -1,12 +1,8 @@
-from os import path
 from nose import tools
 from qaamus2 import parsers
+from tests.config import html_markup
 
-
-THE_DIR = path.abspath(path.dirname(__file__))
-
-with open(path.join(THE_DIR, 'source/panahan.html'), 'r') as f:
-    HTML_FIXTURE = f.read()
+HTML_FIXTURE = html_markup('source/panahan.html')
 
 def test_utama_without_param():
     parser = parsers.Parser(HTML_FIXTURE)
