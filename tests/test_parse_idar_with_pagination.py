@@ -1,11 +1,9 @@
-from os import path
+
 from nose import tools, with_setup
 from qaamus2 import parsers
+from tests.config import html_markup
 
-THE_DIR = path.dirname(__file__)
-
-with open(path.join(THE_DIR, 'source/lari.html'), 'r') as html:
-    HTML_FIXTURE = html.read()
+HTML_FIXTURE = html_markup('source/lari.html')
 
 def test_init():
     assert 'nama' in HTML_FIXTURE
@@ -77,8 +75,7 @@ def test_current_page():
 
 # found bug
 def test_pages_with_plus_sign_in_the_url():
-    with open(path.join(THE_DIR, 'source/rumah+sakit.html'), 'r') as f:
-        html = f.read()
+    html = html_markup('source/rumah+sakit.html')
 
     parser = parsers.Parser(html)
     tools.eq_(len(parser.pages), 5)
