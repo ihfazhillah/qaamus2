@@ -3,11 +3,9 @@ from unittest.mock import patch
 from qaamus2.scraper import PegonScraper
 from qaamus2.models.pegon import PegonModel
 from nose import tools
+from tests.config import html_markup
 
-
-THIS_PATH = os.path.dirname(__file__)
-with open(os.path.join(THIS_PATH, 'source/suharto.html'), 'r') as f:
-    PEGON_HTML = f.read()
+PEGON_HTML = html_markup('source/suharto.html')
 
 
 @patch('qaamus2.scraper.requests.get')
