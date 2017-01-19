@@ -47,3 +47,18 @@ class PegonScraper(object):
     @classmethod
     def check_pilihan(cls, pilihan):
         return pilihan == 'pegon'
+
+class MunawwirScraper(object):
+    def __init__(self, indo):
+        self.indo = indo
+        self.url = "http://qaamus.com/indonesia-arab/{}/1".format(indo)
+        self.get_response()
+
+    def get_response(self):
+        resp = requests.get(self.url)
+        self.encoding = 'cp1256'
+        self.response = resp.text
+
+    @classmethod
+    def check_pilihan(cls, pilihan):
+        return pilihan == 'munawwir'
