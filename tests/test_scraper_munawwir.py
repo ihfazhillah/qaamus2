@@ -29,12 +29,12 @@ def test_berhubungan(obj):
 
     munawwir = MunawwirScraper('lari')
 
-    # print(dir(munawwir.berhubungan))
-
     berhubungan = next(munawwir.berhubungan)
 
     expected = MunawwirBerhubModel('lari berjingkrak-jingkrak', 
                                    'خَاضَ - يَخُوْضُ الجَوَادُ فِـي الـمَيْدَانِ',
                                    'http://qaamus.com/indonesia-arab/Lari+berjingkrak-jingkrak/1').__dict__
 
+
     tools.eq_(berhubungan.__dict__, expected)
+    tools.ok_(isinstance(munawwir.berhubungan, MunawwirBerhubModelCollections))
