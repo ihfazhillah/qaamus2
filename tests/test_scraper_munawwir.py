@@ -56,3 +56,11 @@ def test_hasil(munawwir_mock,obj):
                              berhubungan=munawwir_mock)
 
     tools.eq_(munawwir.hasil().__dict__, expected.__dict__)
+
+@patch('qaamus2.scraper.requests.get')
+def test_has_pagination(obj):
+    obj.return_value.text = RESPONSE
+
+    munawwir = MunawwirScraper('lari')
+
+    tools.ok_(munawwir.has_pagination)

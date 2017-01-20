@@ -83,3 +83,9 @@ class MunawwirScraper(object):
                              sumber=source,
                              url=self.url,
                              berhubungan=self.berhubungan)
+
+    @property
+    def has_pagination(self):
+        parser = Parser(self.response)
+
+        return parser.has_pagination
