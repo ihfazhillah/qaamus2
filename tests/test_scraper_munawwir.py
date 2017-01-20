@@ -72,3 +72,13 @@ def test_current_pagination(obj):
     munawwir = MunawwirScraper('lari')
 
     tools.eq_(munawwir.current_page, 1)
+
+@patch('qaamus2.scraper.requests.get')
+def test_get_pages(obj):
+    obj.return_value.text = RESPONSE
+
+    munawwir = MunawwirScraper('lari')
+
+    tools.eq_(len(munawwir.pages), 4)
+
+    tools.eq_(max(munawwir.pages), 'http://qaamus.com/indonesia-arab/lari/4')

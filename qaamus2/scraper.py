@@ -95,3 +95,9 @@ class MunawwirScraper(object):
         parser = Parser(self.response)
 
         return parser.current_page
+
+    @property
+    def pages(self):
+        parser = Parser(self.response)
+
+        return parser.pages
