@@ -64,3 +64,11 @@ def test_has_pagination(obj):
     munawwir = MunawwirScraper('lari')
 
     tools.ok_(munawwir.has_pagination)
+
+@patch('qaamus2.scraper.requests.get')
+def test_current_pagination(obj):
+    obj.return_value.text = RESPONSE
+
+    munawwir = MunawwirScraper('lari')
+
+    tools.eq_(munawwir.current_page, 1)
