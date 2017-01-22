@@ -103,6 +103,10 @@ class MunawwirScraper(object):
         return parser.pages
 
     def next_page(self):
+
+        if self.current_page == len(self.pages):
+            raise IndexError("Ini sudah ujung halaman.")
+
         url = self.pages[self.current_page] # karena index mulai dari 0
 
         resp = requests.get(url)
