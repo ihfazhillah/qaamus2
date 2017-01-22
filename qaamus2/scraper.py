@@ -101,3 +101,14 @@ class MunawwirScraper(object):
         parser = Parser(self.response)
 
         return parser.pages
+
+    def next_page(self):
+        url = self.pages[self.current_page] # karena index mulai dari 0
+
+        resp = requests.get(url)
+
+        self.encoding = 'cp1256'
+
+        self.response = resp.text
+
+        return self
