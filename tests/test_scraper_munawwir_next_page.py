@@ -2,6 +2,8 @@ from unittest.mock import patch, PropertyMock
 from nose import tools
 
 from qaamus2.scraper import MunawwirScraper
+from qaamus2.models.munawwir_berhub_collections import MunawwirBerhubModelCollections
+from qaamus2.models.munawwir_berhub import MunawwirBerhubModel
 from tests.config import html_markup
 
 
@@ -46,6 +48,29 @@ def test_next_page_kalau_sudah_di_ujung(scraper_mock, resp_mock):
     page_four.next_page()
 
 
+
+@patch('qaamus2.scraper.requests.get')
+def test_hasil_next_page_berhub(resp_mock):
+    # reponse pertama
+    resp_mock.return_value.text = RESPONSE
+
+    page_one = MunawwirScraper('lari')
+
+    tools.eq_(page_one.current_page, 1)
+
+    # response kedua
+
+    resp_mock.return_value.text = RESPONSE2
+
+    page_two = page_one.next_page()
+
+    expected = MunawwirBerhubModel(indo='lari berantai', 
+                                   arab='عَدْوٌ أَو جَرْيٌ بِتَسَلْسُلٍ', 
+                                   url='http://qaamus.com/indonesia-arab/lari+berantai/1')
+
+    tools.eq_(len(page_two.berhubungan), 10)
+    tools.eq_(next(page_two.berhubungan).__dict__, expected.__dict__)
+    tools.ok_(isinstance(page_two.berhubungan, MunawwirBerhubModelCollections))
 
 
 
