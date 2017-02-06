@@ -7,6 +7,11 @@ from qaamus2.models.munawwir_berhub import MunawwirBerhubModel
 from qaamus2.models.munawwir import MunawwirModel
 
 
+ANGKA_URL = "http://qaamus.com/terjemah-angka/{}/angka"
+PEGON_URL = "http://qaamus.com/terjemah-nama/{}"
+MUNAWWIR_URL = "http://qaamus.com/indonesia-arab/{}/{}"
+
+
 def request_get(url):
     resp = requests.get(url)
     resp.encoding = 'cp1256'
@@ -17,7 +22,7 @@ class AngkaScraper(object):
     
     def __init__(self, indo):
         self.indo = indo
-        self.url = "http://qaamus.com/terjemah-angka/{}/angka".format(indo)
+        self.url = ANGKA_URL.format(indo)
         self.response = request_get(self.url)
 
     def hasil(self):
@@ -34,7 +39,7 @@ class PegonScraper(object):
 
     def __init__(self, indo):
         self.indo = indo
-        self.url = "http://qaamus.com/terjemah-nama/{}".format(indo)
+        self.url = PEGON_URL.format(indo)
         self.response = request_get(self.url)
 
     def hasil(self):
@@ -49,7 +54,7 @@ class PegonScraper(object):
 class MunawwirScraper(object):
     def __init__(self, indo, page=1):
         self.indo = indo
-        self.url = "http://qaamus.com/indonesia-arab/{}/{}".format(indo, page)
+        self.url = MUNAWWIR_URL.format(indo, page)
         self.response = request_get(self.url)
 
     @classmethod
