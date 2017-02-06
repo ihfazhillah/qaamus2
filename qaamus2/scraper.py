@@ -47,9 +47,9 @@ class PegonScraper(object):
         return pilihan == 'pegon'
 
 class MunawwirScraper(object):
-    def __init__(self, indo):
+    def __init__(self, indo, page=1):
         self.indo = indo
-        self.url = "http://qaamus.com/indonesia-arab/{}/1".format(indo)
+        self.url = "http://qaamus.com/indonesia-arab/{}/{}".format(indo, page)
         self.response = request_get(self.url)
 
     @classmethod
