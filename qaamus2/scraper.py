@@ -50,7 +50,7 @@ class BaseScraper(object):
         parser = self.parser(self.response)
         utama = parser.utama()
 
-        if self.model != MunawwirModel:
+        if not isinstance(utama, tuple):
             return self.model(self.indo, utama, self.url)
         else:
             arab, baca, source = utama
