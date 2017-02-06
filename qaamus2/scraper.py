@@ -6,17 +6,19 @@ from qaamus2.models.munawwir_berhub_collections import MunawwirBerhubModelCollec
 from qaamus2.models.munawwir_berhub import MunawwirBerhubModel
 from qaamus2.models.munawwir import MunawwirModel
 
+
+def request_get(url):
+    resp = requests.get(url)
+    resp.encoding = 'cp1256'
+    return resp.text
+
+
 class AngkaScraper(object):
     
     def __init__(self, indo):
         self.indo = indo
         self.url = "http://qaamus.com/terjemah-angka/{}/angka".format(indo)
-        self.response = self.get_response(indo)
-
-    def get_response(self, indo):
-        resp = requests.get(self.url)
-        resp.encoding = 'cp1256'
-        return resp.text
+        self.response = request_get(self.url)
 
     def hasil(self):
         parser = Parser(self.response)
@@ -33,13 +35,7 @@ class PegonScraper(object):
     def __init__(self, indo):
         self.indo = indo
         self.url = "http://qaamus.com/terjemah-nama/{}".format(indo)
-        self.get_response()
-        # self.response = None
-
-    def get_response(self):
-        resp = requests.get(self.url)
-        resp.encoding = 'cp1256'
-        self.response = resp.text
+        self.response = request_get(self.url)
 
     def hasil(self):
         parser = Parser(self.response)
@@ -54,12 +50,7 @@ class MunawwirScraper(object):
     def __init__(self, indo):
         self.indo = indo
         self.url = "http://qaamus.com/indonesia-arab/{}/1".format(indo)
-        self.get_response()
-
-    def get_response(self):
-        resp = requests.get(self.url)
-        resp.encoding = 'cp1256'
-        self.response = resp.text
+        self.response = request_get(self.url)
 
     @classmethod
     def check_pilihan(cls, pilihan):
@@ -109,10 +100,8 @@ class MunawwirScraper(object):
 
         url = self.pages[self.current_page] # karena index mulai dari 0
 
-        resp = requests.get(url)
+        resp = request_get(url)
 
-        self.encoding = 'cp1256'
-
-        self.response = resp.text
+        self.response = resp
 
         return self
