@@ -37,11 +37,11 @@ class BaseScraper(object):
         else:
             arab, baca, source = utama
             return self.model(indo=self.indo,
-                             arab=arab,
-                             baca=baca,
-                             sumber=source,
-                             url=self.url,
-                             berhubungan=self.berhubungan)
+                              arab=arab,
+                              baca=baca,
+                              sumber=source,
+                              url=self.url,
+                              berhubungan=self.berhubungan)
 
 
 class AngkaScraper(BaseScraper):
