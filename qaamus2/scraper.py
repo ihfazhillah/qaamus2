@@ -23,15 +23,25 @@ class BaseScraper(object):
     parser = Parser
     model = None
 
-    def __init__(self, indo):
-        self.url = self.url.format(indo)
+    def __init__(self, indo, page=1):
+        self.url = self.url.format(indo, page)
         self.indo = indo
         self.response = request_get(self.url)
 
     def hasil(self):
         parser = self.parser(self.response)
         utama = parser.utama()
-        return self.model(self.indo, utama, self.url)
+
+        if isinstance(utama, str):
+            return self.model(self.indo, utama, self.url)
+        else:
+            arab, baca, source = utama
+            return self.model(indo=self.indo,
+                             arab=arab,
+                             baca=baca,
+                             sumber=source,
+                             url=self.url,
+                             berhubungan=self.berhubungan)
 
 
 class AngkaScraper(BaseScraper):
@@ -53,12 +63,11 @@ class PegonScraper(BaseScraper):
     def check_pilihan(cls, pilihan):
         return pilihan == 'pegon'
 
-class MunawwirScraper(object):
-    def __init__(self, indo, page=1):
-        self.indo = indo
-        self.url = MUNAWWIR_URL.format(indo, page)
-        self.response = request_get(self.url)
-
+class MunawwirScraper(BaseScraper):
+ 
+    url = MUNAWWIR_URL
+    model = MunawwirModel
+ 
     @classmethod
     def check_pilihan(cls, pilihan):
         return pilihan == 'munawwir'
@@ -70,17 +79,6 @@ class MunawwirScraper(object):
         berhubungan_iter = (MunawwirBerhubModel(x[1], x[2], x[0]) for x in berhubungan)
 
         return MunawwirBerhubModelCollections(berhubungan_iter)
-
-    def hasil(self):
-        parser = Parser(self.response)
-        arab, baca, source = parser.utama()
-
-        return MunawwirModel(indo=self.indo,
-                             arab=arab,
-                             baca=baca,
-                             sumber=source,
-                             url=self.url,
-                             berhubungan=self.berhubungan)
 
     @property
     def has_pagination(self):
