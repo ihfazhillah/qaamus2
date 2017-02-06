@@ -58,7 +58,7 @@ class MunawwirScraper(object):
 
     def get_response(self):
         resp = requests.get(self.url)
-        self.encoding = 'cp1256'
+        resp.encoding = 'cp1256'
         self.response = resp.text
 
     @classmethod
