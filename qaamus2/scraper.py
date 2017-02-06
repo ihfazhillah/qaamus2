@@ -18,34 +18,36 @@ def request_get(url):
     return resp.text
 
 
-class AngkaScraper(object):
-    
+class BaseScraper(object):
+    url = None
+    parser = Parser
+    model = None
+
     def __init__(self, indo):
+        self.url = self.url.format(indo)
         self.indo = indo
-        self.url = ANGKA_URL.format(indo)
         self.response = request_get(self.url)
 
     def hasil(self):
-        parser = Parser(self.response)
+        parser = self.parser(self.response)
         utama = parser.utama()
-        return AngkaModel(self.indo, utama, self.url)
+        return self.model(self.indo, utama, self.url)
+
+
+class AngkaScraper(BaseScraper):
+
+    url = ANGKA_URL
+    model = AngkaModel
 
     @classmethod
     def check_pilihan(self, pilihan):
         return pilihan == 'angka'
 
 
-class PegonScraper(object):
+class PegonScraper(BaseScraper):
 
-    def __init__(self, indo):
-        self.indo = indo
-        self.url = PEGON_URL.format(indo)
-        self.response = request_get(self.url)
-
-    def hasil(self):
-        parser = Parser(self.response)
-        utama = parser.utama()
-        return PegonModel(self.indo, utama, self.url)
+    url = PEGON_URL
+    model = PegonModel
 
     @classmethod
     def check_pilihan(cls, pilihan):
