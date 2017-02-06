@@ -30,3 +30,16 @@ def test_current_page_with_page_two(request_mock):
     m = MunawwirScraper('lari', page=2)
 
     tools.eq_(m.current_page, 2)
+
+
+@patch('qaamus2.scraper.requests.get')
+def test_to_page_method_to_page_one_from_two(request_mock):
+    request_mock.return_value.text = RESPONSE2
+
+    m = MunawwirScraper('lari', page=2)
+
+    request_mock.return_value.text = RESPONSE1
+
+    m1 = m.to_page(page=1)
+
+    tools.eq_(m1.url, URL.format('lari', '1'))

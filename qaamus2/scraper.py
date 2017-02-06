@@ -105,3 +105,6 @@ class MunawwirScraper(object):
         self.response = resp
 
         return self
+
+    def to_page(self, page):
+        return MunawwirScraper(indo=self.indo, page=page)
