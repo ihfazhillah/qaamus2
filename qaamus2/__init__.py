@@ -13,6 +13,8 @@ class Qaamus(object):
             if scraper.check_pilihan(self.layanan):
                 return scraper
 
+        raise ValueError("Layanan %s tidak ditemukan" % self.layanan)
+
     @staticmethod
     def register_scraper(scraper):
 
