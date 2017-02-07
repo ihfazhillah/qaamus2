@@ -1,6 +1,23 @@
+"""Modul qaamus2"""
 from qaamus2.scraper import BaseScraper, AngkaScraper, PegonScraper, MunawwirScraper
 
 class Qaamus(object):
+    """Qaamus, python interface untuk berinteraksi dengan qaamus.com
+
+    >>> from qaamus2 import Qaamus
+    >>> pegon = Qaamus(layanan='pegon')
+
+    untuk diperhatikan, layanan yang tersedia adalah:
+        - pegon
+        - angka
+        - munawwir 
+
+    >>> suharto = pegon(indo='suharto')
+    >>> suharto.indo
+    'suharto'
+
+    that is... !!
+    """
     scrapers = []
 
     def __init__(self, layanan):
@@ -8,6 +25,8 @@ class Qaamus(object):
         self.scraper = self.get_scraper()
 
     def get_scraper(self):
+        """dipakai internally, untuk mendapatkan scraper
+        yang telah diregister berdasarkan layanan"""
         for scraper in Qaamus.scrapers:
             if scraper.check_pilihan(self.layanan):
                 return scraper
@@ -16,6 +35,7 @@ class Qaamus(object):
 
     @staticmethod
     def register_scraper(scraper):
+        """Meregister scraper, scraper harus subclass dari BaseScraper"""
 
         if not issubclass(scraper, BaseScraper):
             raise TypeError("%s bukan subclass dari BaseScraper" % scraper.__name__)
