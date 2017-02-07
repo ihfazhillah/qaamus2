@@ -90,11 +90,12 @@ class PegonScraper(BaseScraper):
 
     url = PEGON_URL
     model = PegonModel
+    layanan = 'pegon'
 
     @classmethod
     def check_pilihan(cls, pilihan):
         """untuk pilihan nanti di class observer (kalau tidak salah)"""
-        return pilihan == 'pegon'
+        return pilihan == cls.layanan
 
 class MunawwirScraper(BaseScraper):
     """Munawwir scraper

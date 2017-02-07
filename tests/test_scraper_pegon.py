@@ -29,3 +29,7 @@ def test_hasil(mock_obj):
 @patch('qaamus2.scraper.requests.get')
 def test_check_pilihan(mock_obj):
     tools.ok_(PegonScraper.check_pilihan('pegon'))
+
+@patch('qaamus2.scraper.requests.get')
+def test_pilihan_attribut(mock_obj):
+    tools.eq_(PegonScraper.layanan, 'pegon')
