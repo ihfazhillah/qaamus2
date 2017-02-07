@@ -10,6 +10,10 @@ def test_get_angka_scraper():
 def test_layanan_tidak_ditemukan():
     Qaamus('arar').get_scraper()
 
+@tools.raises(ValueError)
+def test_layanan_tidak_ditemukan_juga_ketika_sudah_jadi_instance():
+    Qaamus('tidak')
+
 #: TODO
 #: tampilkan daftar layanan ketika layanan tidak ditemukan
 #: kita ubah di file scraper

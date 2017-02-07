@@ -5,6 +5,7 @@ class Qaamus(object):
 
     def __init__(self, layanan):
         self.layanan = layanan
+        self.scraper = self.get_scraper()
 
     def get_scraper(self):
         for scraper in Qaamus.scrapers:
@@ -24,7 +25,7 @@ class Qaamus(object):
             Qaamus.scrapers.append(scraper)
 
     def __call__(self, indo, page=1):
-        scraper = self.get_scraper()
+        scraper = self.scraper
         return scraper(indo=indo, page=page).hasil()
 
 Qaamus.register_scraper(AngkaScraper)
