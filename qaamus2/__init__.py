@@ -3,9 +3,8 @@ from qaamus2.scraper import BaseScraper, AngkaScraper, PegonScraper, MunawwirScr
 class Qaamus(object):
     scrapers = []
 
-    def __init__(self, layanan, indo):
+    def __init__(self, layanan):
         self.layanan = layanan
-        self.indo = indo
 
     def get_scraper(self):
         for scraper in Qaamus.scrapers:
@@ -23,6 +22,10 @@ class Qaamus(object):
 
         if scraper not in Qaamus.scrapers:
             Qaamus.scrapers.append(scraper)
+
+    def __call__(self, indo):
+        scraper = self.get_scraper()
+        return scraper(indo=indo).hasil()
 
 Qaamus.register_scraper(AngkaScraper)
 Qaamus.register_scraper(PegonScraper)

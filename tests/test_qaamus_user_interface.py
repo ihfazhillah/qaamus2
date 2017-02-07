@@ -14,3 +14,10 @@ MUNAWWIR = html_markup('source/lari.html')
 
 def test_qaamus_scraper():
     tools.eq_(len(Qaamus.scrapers), 3)
+
+
+@patch('qaamus2.scraper.requests.get')
+def test_pegon_scraper(req_mock):
+    req_mock.return_value.text = PEGON
+    pegon = Qaamus(layanan='pegon')(indo='suharto')
+    tools.ok_(isinstance(pegon, PegonModel))
