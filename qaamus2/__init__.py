@@ -10,4 +10,8 @@ class Qaamus(object):
         if not issubclass(scraper, BaseScraper):
             raise TypeError("%s bukan subclass dari BaseScraper" % scraper.__name__)
 
-        Qaamus.scrapers.append(scraper)
+
+        if scraper not in Qaamus.scrapers:
+            Qaamus.scrapers.append(scraper)
+
+
