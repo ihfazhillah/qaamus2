@@ -1,7 +1,11 @@
-from nose import tools
+from nose import tools, with_setup
 
 from qaamus2 import Qaamus
 
+def teardown_func():
+    Qaamus.scrapers = []
+
+@with_setup(teardown_func)
 def test_qaamus_empty_scraper():
     tools.eq_(Qaamus.scrapers, [])
 
