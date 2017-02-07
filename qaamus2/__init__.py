@@ -1,5 +1,4 @@
-from qaamus2.scraper import BaseScraper
-
+from qaamus2.scraper import BaseScraper, AngkaScraper, PegonScraper, MunawwirScraper
 
 class Qaamus(object):
     scrapers = []
@@ -25,5 +24,6 @@ class Qaamus(object):
         if scraper not in Qaamus.scrapers:
             Qaamus.scrapers.append(scraper)
 
-
-
+Qaamus.register_scraper(AngkaScraper)
+Qaamus.register_scraper(PegonScraper)
+Qaamus.register_scraper(MunawwirScraper)
