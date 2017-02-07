@@ -72,11 +72,12 @@ class AngkaScraper(BaseScraper):
 
     url = ANGKA_URL
     model = AngkaModel
+    layanan = 'angka'
 
     @classmethod
     def check_pilihan(cls, pilihan):
         """untuk pilihan nanti di class observer (kalau tidak salah)"""
-        return pilihan == 'angka'
+        return pilihan == cls.layanan
 
 
 class PegonScraper(BaseScraper):

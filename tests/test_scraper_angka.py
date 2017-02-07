@@ -30,3 +30,7 @@ def test_scrape_angka_hasil(mock_obj):
 @patch('qaamus2.scraper.requests.get')
 def test_scrape_angka_check_pilihan(mock_obj):
     tools.eq_(AngkaScraper.check_pilihan('angka'), True)
+
+@patch('qaamus2.scraper.requests.get')
+def test_scrape_angka_layanan(mock_obj):
+    tools.eq_(AngkaScraper.layanan, 'angka')
