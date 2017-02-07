@@ -23,9 +23,9 @@ class Qaamus(object):
         if scraper not in Qaamus.scrapers:
             Qaamus.scrapers.append(scraper)
 
-    def __call__(self, indo):
+    def __call__(self, indo, page=1):
         scraper = self.get_scraper()
-        return scraper(indo=indo).hasil()
+        return scraper(indo=indo, page=page).hasil()
 
 Qaamus.register_scraper(AngkaScraper)
 Qaamus.register_scraper(PegonScraper)
