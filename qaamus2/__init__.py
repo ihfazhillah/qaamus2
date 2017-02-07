@@ -1,6 +1,13 @@
+from qaamus2.scraper import BaseScraper
+
 
 class Qaamus(object):
     scrapers = []
 
-    def register_scraper(self, scraper):
-        raise TypeError("%s bukan subclass dari BaseScraper" % scraper.__name__)
+    @staticmethod
+    def register_scraper(scraper):
+
+        if not issubclass(scraper, BaseScraper):
+            raise TypeError("%s bukan subclass dari BaseScraper" % scraper.__name__)
+
+        Qaamus.scrapers.append(scraper)

@@ -10,3 +10,11 @@ def test_qaamus_empty_scraper():
 def test_qaamus_register_scraper_failed():
     class BukanScraper: pass
     Qaamus.register_scraper(BukanScraper)
+
+def test_qaamus_register_scraper_berhasil():
+    from qaamus2.scraper import AngkaScraper
+    Qaamus.register_scraper(AngkaScraper)
+
+    scrapers = Qaamus.scrapers
+
+    tools.eq_(scrapers[0], AngkaScraper)
