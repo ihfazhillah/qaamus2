@@ -4,6 +4,15 @@ from qaamus2.scraper import BaseScraper
 class Qaamus(object):
     scrapers = []
 
+    def __init__(self, layanan, indo):
+        self.layanan = layanan
+        self.indo = indo
+
+    def get_scraper(self):
+        for scraper in Qaamus.scrapers:
+            if scraper.check_pilihan(self.layanan):
+                return scraper
+
     @staticmethod
     def register_scraper(scraper):
 
@@ -13,5 +22,6 @@ class Qaamus(object):
 
         if scraper not in Qaamus.scrapers:
             Qaamus.scrapers.append(scraper)
+
 
 
