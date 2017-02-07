@@ -1,0 +1,3 @@
+
+class Qaamus(object):
+    scrapers = []
