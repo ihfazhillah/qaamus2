@@ -27,11 +27,15 @@ class Qaamus(object):
     def get_scraper(self):
         """dipakai internally, untuk mendapatkan scraper
         yang telah diregister berdasarkan layanan"""
+
+        layanan_tersedia = []
         for scraper in Qaamus.scrapers:
             if scraper.check_pilihan(self.layanan):
                 return scraper
+            layanan_tersedia.append(scraper.layanan)
 
-        raise ValueError("Layanan %s tidak ditemukan" % self.layanan)
+        raise ValueError("Layanan %s tidak ditemukan. Layanan tersedia: %s" 
+                         % (self.layanan, ', '.join(layanan_tersedia)))
 
     @staticmethod
     def register_scraper(scraper):
