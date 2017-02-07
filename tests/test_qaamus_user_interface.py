@@ -21,3 +21,9 @@ def test_pegon_scraper(req_mock):
     req_mock.return_value.text = PEGON
     pegon = Qaamus(layanan='pegon')(indo='suharto')
     tools.ok_(isinstance(pegon, PegonModel))
+
+@patch('qaamus2.scraper.requests.get')
+def test_angka_scraper(req_mock):
+    req_mock.return_value.text = ANGKA
+    angka = Qaamus(layanan='angka')(indo=2017)
+    tools.ok_(isinstance(angka, AngkaModel))
