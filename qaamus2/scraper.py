@@ -110,11 +110,12 @@ class MunawwirScraper(BaseScraper):
  
     url = MUNAWWIR_URL
     model = MunawwirModel
+    layanan = 'munawwir'
  
     @classmethod
     def check_pilihan(cls, pilihan):
         """untuk pilihan nanti di class observer (kalau tidak salah)"""
-        return pilihan == 'munawwir'
+        return pilihan == cls.layanan
 
     @property
     def berhubungan(self):

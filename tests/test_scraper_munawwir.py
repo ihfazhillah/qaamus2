@@ -24,6 +24,10 @@ def test_check_pilihan(obj):
 
 
 @patch('qaamus2.scraper.requests.get')
+def test_layanan_atribut(obj):
+    tools.eq_(MunawwirScraper.layanan, 'munawwir')
+
+@patch('qaamus2.scraper.requests.get')
 def test_berhubungan(obj):
     obj.return_value.text = RESPONSE
 
