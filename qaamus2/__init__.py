@@ -13,7 +13,7 @@ class Qaamus(object):
         - munawwir 
 
     >>> suharto = pegon(indo='suharto')
-    >>> suharto.indo
+    >>> suharto.hasil().indo
     'suharto'
 
     that is... !!
