@@ -2,10 +2,7 @@
 Qaamus
 ====================
 
-Qaamus, pada dasarnya adalah library python yang digunakan untuk berinteraksi dengan website qaamus.com_. Tapi tidak menutup kemungkinan akan ditambahkan module dari beberapa website yang ada, yang lainnya.
-.. _qaamus.com: http://qaamus.com 
-
-
+Qaamus, pada dasarnya adalah library python yang digunakan untuk berinteraksi dengan website `qaamus.com <http://qaamus.com>`_. Tapi tidak menutup kemungkinan akan ditambahkan module dari beberapa website yang ada, yang lainnya.
 Instalasi
 ==========
 
@@ -13,14 +10,16 @@ Sampai saat ini, belum saya upload ke pypi_. Hanya ada di github_.
 
 Clone Github
 ---------------
-::
+ ::
+
     $ git clone https://github.com/ihfazhillah/qaamus2.git
     $ cd qaamus2
     $ python setup.py install
 
 Menggunakan `pip`
 -------------------
-::
+ ::
+
     $ pip install git+https://github.com/ihfazhillah/qaamus2.git
 
 .. _pypi: http://
@@ -54,5 +53,3 @@ Setelah selesai installasi, maka berikut ini adalah cara penggunaannya::
     <MunawwirBerhubunganModelCollections>
     >>> dir(lari)
     ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'berhubungan', 'check_pilihan', 'current_page', 'has_pagination', 'hasil', 'indo', 'layanan', 'model', 'next_page', 'pages', 'parser', 'response', 'to_page', 'url']
-
-
