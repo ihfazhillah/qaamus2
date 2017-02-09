@@ -19,23 +19,23 @@ def test_qaamus_scraper():
 @patch('qaamus2.scraper.requests.get')
 def test_pegon_scraper(req_mock):
     req_mock.return_value.text = PEGON
-    pegon = Qaamus(layanan='pegon')(indo='suharto')
+    pegon = Qaamus(layanan='pegon').terjemah(indo='suharto')
     tools.ok_(isinstance(pegon, PegonModel))
 
 @patch('qaamus2.scraper.requests.get')
 def test_angka_scraper(req_mock):
     req_mock.return_value.text = ANGKA
-    angka = Qaamus(layanan='angka')(indo=2017)
+    angka = Qaamus(layanan='angka').terjemah(indo=2017)
     tools.ok_(isinstance(angka, AngkaModel))
 
 @patch('qaamus2.scraper.requests.get')
 def test_munawwir_scraper(req_mock):
     req_mock.return_value.text = MUNAWWIR
-    angka = Qaamus(layanan='munawwir')(indo='lari')
+    angka = Qaamus(layanan='munawwir').terjemah(indo='lari')
     tools.ok_(isinstance(angka, MunawwirModel))
 
 @patch('qaamus2.scraper.requests.get')
 def test_angka_scraper(req_mock):
     req_mock.return_value.text = ANGKA
-    angka = Qaamus(layanan='angka')(indo=2017, page=2)
+    angka = Qaamus(layanan='angka').terjemah(indo=2017, page=2)
     tools.ok_(isinstance(angka, AngkaModel))
