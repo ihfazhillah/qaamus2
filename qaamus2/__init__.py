@@ -49,6 +49,9 @@ class Qaamus(object):
             Qaamus.scrapers.append(scraper)
 
     def terjemah(self, indo, page=1):
+        """terjemahkan hasil
+        indo kata yang mau di terjemahkan,
+        page halaman, secara default halaman satu (hanya dipakai untuk munawwir)"""
         scraper = self.scraper
         return scraper(indo=indo, page=page).hasil()
 
