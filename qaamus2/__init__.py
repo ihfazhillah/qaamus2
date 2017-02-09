@@ -53,7 +53,7 @@ class Qaamus(object):
         indo kata yang mau di terjemahkan,
         page halaman, secara default halaman satu (hanya dipakai untuk munawwir)"""
         scraper = self.scraper
-        return scraper(indo=indo, page=page).hasil()
+        return scraper(indo=indo, page=page)
 
 Qaamus.register_scraper(AngkaScraper)
 Qaamus.register_scraper(PegonScraper)
