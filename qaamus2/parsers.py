@@ -49,7 +49,7 @@ class Parser(object):
 
             if strip_tags:
                 return tuple(self.strip_tags(x) for x in hasil)
-
+            return hasil
 
         return patterns.ANGKA_PEGON.search(self.html_source).group(1).strip()
 

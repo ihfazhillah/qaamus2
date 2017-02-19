@@ -10,3 +10,9 @@ def test_dapatkan_hasil_utama():
     utama_expected = ('رخصة الزواج', '*Diterjemahkan dengan Bing Translator')
 
     tools.eq_(utama_expected, parsed.utama())
+
+def test_dapatkan_hasil_utama_strip_tags_false():
+    parsed = parsers.Parser(FIXTURE)
+    utama_expected = ('رخصة الزواج', '*Diterjemahkan dengan Bing Translator ')
+
+    tools.eq_(utama_expected, parsed.utama(strip_tags=False))
