@@ -20,3 +20,12 @@ def test_berhubungan_harus_instance_dari_munawwirberhubmodelcollections():
     data = DATA.copy()
     data['berhubungan'] = 'apasaja'
     MunawwirModel(**data)
+
+def test_munawwir_tanpa_baca():
+    data = DATA.copy()
+    del data['baca']
+
+    #: pastikan tidak ada exception disini
+    munawwir = MunawwirModel(**data)
+
+    tools.eq_(munawwir.indo, 'makan')
