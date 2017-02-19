@@ -23,6 +23,12 @@ class Parser(object):
                 bila strip_tags True maka tags akan dihilangkan, dan whitespaces di kanan
                 dan kiri juga dihilangkan,
                 else maka akan ditampilkan bersama tag
+
+                (Ini berhasil bila yang dicari terdapat di kamus)
+            BILA HASIL UTAMA ADA 2 ELEMENT
+                ini terjadi bila hasil utama didapatkan dari bing translator.
+                maka akan mengembalikan tuple berisi 2 item. index 0 adalah arab, dan 1 adalah
+                source
             BILA HANYA SATU
                 string
         """
@@ -35,6 +41,15 @@ class Parser(object):
                 return tuple(self.strip_tags(x) for x in hasil)
 
             return hasil
+
+        hasil = patterns.IDAR_BING.search(self.html_source)
+
+        if hasil:
+            hasil = hasil.groups()
+
+            if strip_tags:
+                return tuple(self.strip_tags(x) for x in hasil)
+
 
         return patterns.ANGKA_PEGON.search(self.html_source).group(1).strip()
 
