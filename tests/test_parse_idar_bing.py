@@ -27,3 +27,8 @@ def test_dapatkan_berhubungan():
     akad = next(berhubungan)
 
     tools.eq_('akad nikah', akad[1])
+
+def test_has_pagination():
+    parsed = parsers.Parser(FIXTURE)
+
+    tools.ok_(parsed.has_pagination)
