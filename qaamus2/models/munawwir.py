@@ -4,7 +4,7 @@ from qaamus2.models import munawwir_berhub_collections as mbc
 
 class MunawwirModel(QaamusBaseModel):
     """Model Munawwir"""
-    def __init__(self, indo, arab, baca, url, berhubungan, sumber):
+    def __init__(self, indo, arab, url, berhubungan, sumber, baca=None):
         super(MunawwirModel, self).__init__(indo)
         self.indo = indo
         self.arab = arab
