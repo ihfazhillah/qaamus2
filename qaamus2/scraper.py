@@ -53,7 +53,12 @@ class BaseScraper(object):
         if not isinstance(utama, tuple):
             return self.model(self.indo, utama, self.url)
         else:
-            arab, baca, source = utama
+            if len(utama) == 3:
+                arab, baca, source = utama
+            else:
+                arab, source = utama
+                baca = None
+            
             return self.model(indo=self.indo,
                               arab=arab,
                               baca=baca,
